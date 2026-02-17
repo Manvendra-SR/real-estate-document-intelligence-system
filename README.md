@@ -169,7 +169,7 @@ Endpoints:
   ![Upload Screenshot](screenshots/upload.png)
 
 - **Results View**
-  ![Results Screenshot](screenshots/results.png)
+  ![Results Screenshot](screenshots/search.png)
 
 ---
 
