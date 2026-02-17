@@ -152,7 +152,8 @@ Current prototype limitations:
 
 ``` bash
 pip install -r requirements.txt
-uvicorn app:main --reload
+uvicorn main:app --reload
+streamlit run frontend.py
 ```
 
 Endpoints:
