@@ -52,12 +52,12 @@ Hybrid Search (Dense + BM25) → Cross-Encoder Reranking → API Response
 
 ## Dataset
 
-  PDF                  Pages   Chunks
-  -------------------- ------- --------
-  Estate 360           67      69
-  ML Stanford          216     222
-  E-128 Brochure       55      ---
-  Max House Brochure   16      ---
+| PDF | Pages | Chunks |
+| :--- | :---: | :---: |
+| Estate 360 | 67 | 69 |
+| ML Stanford | 216 | 222 |
+| E-128 Brochure | 55 | --- |
+| Max House Brochure | 16 | --- |
 
 ## Evaluation Framework
 
@@ -75,20 +75,20 @@ Hybrid Search (Dense + BM25) → Cross-Encoder Reranking → API Response
 
 ## Dense Only (No Reranker)
 
-  Model               Top-1   Top-3   Avg Latency   P95
-  ------------------- ------- ------- ------------- ------
-  all-MiniLM-L6-v2    0.60    0.90    21ms          40ms
-  intfloat/e5-small   0.80    0.80    43ms          76ms
+| Model | Top-1 | Top-3 | Avg Latency | P95 |
+| :--- | :---: | :---: | :---: | :---: |
+| all-MiniLM-L6-v2 | 0.60 | 0.90 | 21ms | 40ms |
+| intfloat/e5-small | 0.80 | 0.80 | 43ms | 76ms |
 
 ------------------------------------------------------------------------
 
 ## Hybrid + MiniLM Reranker (CUDA)
 
-  Embedding Model          Top-1   Top-3   Avg Latency   P95
-  ------------------------ ------- ------- ------------- -------
-  all-MiniLM-L6-v2         0.75    0.85    30ms          38ms
-  intfloat/e5-small        0.90    1.00    54ms          95ms
-  BAAI/bge-small-en-v1.5   0.85    0.95    80ms          116ms
+| Embedding Model | Top-1 | Top-3 | Avg Latency | P95 |
+| :--- | :---: | :---: | :---: | :---: |
+| all-MiniLM-L6-v2 | 0.75 | 0.85 | 30ms | 38ms |
+| intfloat/e5-small | 0.90 | 1.00 | 54ms | 95ms |
+| BAAI/bge-small-en-v1.5 | 0.85 | 0.95 | 80ms | 116ms |
 
 ### Observations
 
