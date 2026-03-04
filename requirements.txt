@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+streamlit
+sentence-transformers
+faiss-cpu
+rank-bm25
+pymupdf
+python-multipart
+python-dotenv
+diskcache
+-e .
