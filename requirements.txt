@@ -7,5 +7,8 @@ rank-bm25
 pymupdf
 python-multipart
 python-dotenv
+<<<<<<< HEAD
 diskcache
+=======
+>>>>>>> a3967c1cde6924a4bd574526238e4390c97213ef
 -e .
