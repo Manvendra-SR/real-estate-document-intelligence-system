@@ -43,8 +43,11 @@ with tab_upload:
     st.subheader("⚠️ Index Management")
     if st.button("🗑️ Reset Entire Index"):
         res = requests.delete(f"{BASE_URL}/index/reset")
-        st.success(res.json()["message"]) if res.status_code == 200 \
-            else st.error("Failed to reset index.")
+
+        if res.status_code == 200:
+            st.success(res.json()["message"])
+        else:
+            st.error("Failed to reset index.")
 
 
 # ═══════════════════════════════════════════════════════════════════════════

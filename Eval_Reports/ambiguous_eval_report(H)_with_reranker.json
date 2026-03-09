@@ -1,0 +1,153 @@
+{
+  "total_ambiguous_queries": 5,
+  "Multi_Source_Coverage": 1.0,
+  "multi_source_count": 5,
+  "note": "Multi_Source_Coverage = % of queries where top-K results span \u2265 2 distinct PDFs. Higher means the system correctly surfaces ambiguity instead of anchoring to a single document.",
+  "rows": [
+    {
+      "query": "What is the total area?",
+      "distinct_sources": [
+        "max-towers-brochure.pdf",
+        "max-house-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 7,
+          "score": -7.8564,
+          "snippet": "Fact sheet\nIconic presence \nArchitects\nSuper built-up area\nNumber of \ufb02 oors\nTypical \ufb02 oor size\nE\ufb03  ciency\nSustainability\nParking\nEarthquake \nresistance\nHVAC system \ndesign parameters\nAir treatment\nPow"
+        },
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 8,
+          "score": -8.6095,
+          "snippet": "Super built-up area\nNumber of \ufb02oors Floor-to-\ufb02oor height\nTypical o\ufb03ce \ufb02oor plate size\nParking\nGreen rating\n52,016 square metres (559,891 square feet)\n19 o\ufb03ce \ufb02oors  \n4 amenity \ufb02oors  \n3 level basement"
+        },
+        {
+          "pdf_name": "max-house-brochure.pdf",
+          "page": 2,
+          "score": -8.8012,
+          "snippet": "Open for business;\nIn the heart of New Delhi\nOriginally the headquarters of the $3B Max Group, Max House is located at the \nepicenter of the Secondary Business District of Delhi. Offering ~105,000 sq."
+        }
+      ]
+    },
+    {
+      "query": "How many floors does it have?",
+      "distinct_sources": [
+        "max-house-brochure.pdf",
+        "222-rajpur-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 14,
+          "score": -4.5022,
+          "snippet": "TERRACE FLOOR PLAN | TOWNHOUSES \n19\n21\n22\n18\n20\n23\n18 Terrace \n882 sq.ft. \n...\n19 Bedroom 4 \n151 sq.ft.  \n14\u20191\u201d x 10\u201910\u201d\n20 Bathroom 4 \n54 sq.ft.  \n7\u20193\u201d x 7\u20196\u201d\n21 Utility \n43 sq.ft.  \n6\u20197\u201d x 10\u20196\u201d\n22 "
+        },
+        {
+          "pdf_name": "max-house-brochure.pdf",
+          "page": 2,
+          "score": -4.7308,
+          "snippet": "Open for business;\nIn the heart of New Delhi\nOriginally the headquarters of the $3B Max Group, Max House is located at the \nepicenter of the Secondary Business District of Delhi. Offering ~105,000 sq."
+        },
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 13,
+          "score": -4.8369,
+          "snippet": "GROUND FLOOR PLAN | TOWNHOUSE\n1 Entry Lobby \n159 sq.ft. \n18\u20194\u201d x 7\u20196\u201d\n2  Living/Dining Room \n324 sq.ft.  \n13\u20199\u201d x 22\u2019\n3  Courtyard \n145 sq.ft.  \n10\u20196\u201d x 11\u20196\u201d\n4  Powder Room \n26 sq.ft.  \n4\u20193\u201d x 7\u20196\u201d\n5"
+        }
+      ]
+    },
+    {
+      "query": "What certification does it hold?",
+      "distinct_sources": [
+        "max-towers-brochure.pdf",
+        "max-house-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "max-house-brochure.pdf",
+          "page": 10,
+          "score": -3.233,
+          "snippet": "Sustainability:\nLEED Gold Certified\nMax House is designed to be LEED Gold certified.\nMax House is a thought leader in sustainability and aims to minimise its \necological footprint. To do so is importa"
+        },
+        {
+          "pdf_name": "max-house-brochure.pdf",
+          "page": 16,
+          "score": -8.5726,
+          "snippet": "5"
+        },
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 7,
+          "score": -10.4057,
+          "snippet": "Fact sheet\nIconic presence \nArchitects\nSuper built-up area\nNumber of \ufb02 oors\nTypical \ufb02 oor size\nE\ufb03  ciency\nSustainability\nParking\nEarthquake \nresistance\nHVAC system \ndesign parameters\nAir treatment\nPow"
+        }
+      ]
+    },
+    {
+      "query": "How far is it from the airport?",
+      "distinct_sources": [
+        "max-house-brochure.pdf",
+        "222-rajpur-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 5,
+          "score": -3.0005,
+          "snippet": "GET THERE\nBy Air: With over twelve daily \ufb02ights from Delhi, Dehradun is \nperfectly accessible. A short drive to the Jolly Grant airport, a \nmere 25 km away will connect the green valley of Dehradun \nt"
+        },
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 4,
+          "score": -4.0472,
+          "snippet": "THE DOON SCHOOL\n10.6 KM\nWELHAM  \nGIRLS \nSCHOOL\n10.2 KM\nDEHRADUN  \nRAILWAY STATION\n10.7 KM\nJOLLY GRANT AIRPORT  \n36.9 KM\nTOWARDS MUSSOORIE\n28.2 KM\nFOREST RESEARCH \nINSTITUTE  \n15 KM\nPACIFIC MALL\n3.8 KM"
+        },
+        {
+          "pdf_name": "max-house-brochure.pdf",
+          "page": 3,
+          "score": -5.0395,
+          "snippet": "Vasant Kunj\n34 min, 14 km\nIGI Airport\n38 min, 20 km\nGurugram\n60 min, 30 km\nOkhla NSIC Metro Station\n5 min, .3 km\nHauz Khas Metro Station\n15 min, 7 km\nSaket\n20 min, 8 km\nNew Delhi Railway Station\n40 mi"
+        }
+      ]
+    },
+    {
+      "query": "Does it offer parking?",
+      "distinct_sources": [
+        "max-towers-brochure.pdf",
+        "222-rajpur-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 7,
+          "score": -8.1489,
+          "snippet": "Fact sheet\nIconic presence \nArchitects\nSuper built-up area\nNumber of \ufb02 oors\nTypical \ufb02 oor size\nE\ufb03  ciency\nSustainability\nParking\nEarthquake \nresistance\nHVAC system \ndesign parameters\nAir treatment\nPow"
+        },
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 12,
+          "score": -8.7349,
+          "snippet": "4 spacious bedrooms\nFully \ufb01tted modular kitchen \nBuilt in cabinetry and custom woodwork\nSky court\nVRF system for HVAC\nPrivate garden\n2 car parking within premises\nEnergy ef\ufb01cient LED lighting\nGenerous"
+        },
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 31,
+          "score": -9.1312,
+          "snippet": "Facilities\nWeb / app based facility management \u2013 Facility booking management \u2013 Tenant billing system \u2013 Visitor management \u2013 Help desk management \u2013 Guided smart parking management system \u2013 F&B o\ufb00erings"
+        }
+      ]
+    }
+  ]
+}

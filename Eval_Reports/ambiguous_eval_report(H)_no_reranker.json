@@ -1,0 +1,153 @@
+{
+  "total_ambiguous_queries": 5,
+  "Multi_Source_Coverage": 1.0,
+  "multi_source_count": 5,
+  "note": "Multi_Source_Coverage = % of queries where top-K results span \u2265 2 distinct PDFs. Higher means the system correctly surfaces ambiguity instead of anchoring to a single document.",
+  "rows": [
+    {
+      "query": "What is the total area?",
+      "distinct_sources": [
+        "max-towers-brochure.pdf",
+        "222-rajpur-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 32,
+          "score": 0.0305,
+          "snippet": "Power \n33 kV HT power from UPPCL  \nto dedicated HT room on level G1\nLT panels and metre room located on level G1\nTwo 2,000 kVA base building transformers\nOne electrical room allocated to each \ufb02oor\nThr"
+        },
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 6,
+          "score": 0.0167,
+          "snippet": "We view the workplace as  \na strategic asset and a catalyst  \nfor cultural change.\nMax Towers is a next-generation o\ufb03ce building: providing an on-demand, \ncommunity-enabled, and experience-driven work"
+        },
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 18,
+          "score": 0.0167,
+          "snippet": "interior view  \n4 spacious bedrooms\nStaff bedroom & bathroom with separate entry\nPrivate garden on all sides\nFully \ufb01tted modular kitchen \nBuilt in cabinetry & custom woodwork\nVRF system for HVAC\n2 car"
+        }
+      ]
+    },
+    {
+      "query": "How many floors does it have?",
+      "distinct_sources": [
+        "max-towers-brochure.pdf",
+        "222-rajpur-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 5,
+          "score": 0.0167,
+          "snippet": "WorkWell\nIf that sounds like a mantra, it\u2019s because it is one.\nTo us, it stands for a lifestyle where all the physical amenities  \nof a modern workspace come together with human-centric design.\n\u201cWork\u201d"
+        },
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 8,
+          "score": 0.0167,
+          "snippet": "Super built-up area\nNumber of \ufb02oors Floor-to-\ufb02oor height\nTypical o\ufb03ce \ufb02oor plate size\nParking\nGreen rating\n52,016 square metres (559,891 square feet)\n19 o\ufb03ce \ufb02oors  \n4 amenity \ufb02oors  \n3 level basement"
+        },
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 5,
+          "score": 0.0164,
+          "snippet": "GET THERE\nBy Air: With over twelve daily \ufb02ights from Delhi, Dehradun is \nperfectly accessible. A short drive to the Jolly Grant airport, a \nmere 25 km away will connect the green valley of Dehradun \nt"
+        }
+      ]
+    },
+    {
+      "query": "What certification does it hold?",
+      "distinct_sources": [
+        "max-towers-brochure.pdf",
+        "max-house-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "max-house-brochure.pdf",
+          "page": 10,
+          "score": 0.0325,
+          "snippet": "Sustainability:\nLEED Gold Certified\nMax House is designed to be LEED Gold certified.\nMax House is a thought leader in sustainability and aims to minimise its \necological footprint. To do so is importa"
+        },
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 6,
+          "score": 0.0167,
+          "snippet": "We view the workplace as  \na strategic asset and a catalyst  \nfor cultural change.\nMax Towers is a next-generation o\ufb03ce building: providing an on-demand, \ncommunity-enabled, and experience-driven work"
+        },
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 24,
+          "score": 0.0164,
+          "snippet": "Community \n& Culture\nWhat you do outside of work, \nmakes you better at work."
+        }
+      ]
+    },
+    {
+      "query": "How far is it from the airport?",
+      "distinct_sources": [
+        "max-towers-brochure.pdf",
+        "222-rajpur-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 4,
+          "score": 0.0321,
+          "snippet": "FAR ENOUGH, CLOSE ENOUGH. Max Super Speciality Hospital \n6 minutes | 3.2 km\nPaci\ufb01c Mall \n8 minutes | 3.8 km\nMalsi Reserve Forest \n9 minutes | 4.6 km\nAntara Senior Living \n15 minutes | 6.8 km\nWelham Gi"
+        },
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 5,
+          "score": 0.0167,
+          "snippet": "WorkWell\nIf that sounds like a mantra, it\u2019s because it is one.\nTo us, it stands for a lifestyle where all the physical amenities  \nof a modern workspace come together with human-centric design.\n\u201cWork\u201d"
+        },
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 4,
+          "score": 0.0164,
+          "snippet": "THE DOON SCHOOL\n10.6 KM\nWELHAM  \nGIRLS \nSCHOOL\n10.2 KM\nDEHRADUN  \nRAILWAY STATION\n10.7 KM\nJOLLY GRANT AIRPORT  \n36.9 KM\nTOWARDS MUSSOORIE\n28.2 KM\nFOREST RESEARCH \nINSTITUTE  \n15 KM\nPACIFIC MALL\n3.8 KM"
+        }
+      ]
+    },
+    {
+      "query": "Does it offer parking?",
+      "distinct_sources": [
+        "max-towers-brochure.pdf",
+        "222-rajpur-brochure.pdf"
+      ],
+      "num_sources": 2,
+      "multi_source": true,
+      "results": [
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 32,
+          "score": 0.0318,
+          "snippet": "PAYMENT PLAN\nPAYMENT SCHEDULE DOWN PAYMENT PLAN (DPP) on booking 10% of Basic Sales Price within 45 days of booking 85% of Basic Sales Price on offer of possession 5% of Basic Sales Price + IBMS \n+ st"
+        },
+        {
+          "pdf_name": "222-rajpur-brochure.pdf",
+          "page": 30,
+          "score": 0.0167,
+          "snippet": "AT MAX ESTATES  \nOUR MISSION IS TO OFFER SPACES WITH \nTHE UTMOST ATTENTION  \nTO DETAIL, DESIGN  \nAND LIFESTYLE"
+        },
+        {
+          "pdf_name": "max-towers-brochure.pdf",
+          "page": 8,
+          "score": 0.0167,
+          "snippet": "Super built-up area\nNumber of \ufb02oors Floor-to-\ufb02oor height\nTypical o\ufb03ce \ufb02oor plate size\nParking\nGreen rating\n52,016 square metres (559,891 square feet)\n19 o\ufb03ce \ufb02oors  \n4 amenity \ufb02oors  \n3 level basement"
+        }
+      ]
+    }
+  ]
+}

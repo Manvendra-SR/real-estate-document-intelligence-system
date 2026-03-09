@@ -45,169 +45,31 @@ def extract_pdf_text(pdf_path: str) -> list[dict]:
 
 
 def chunk_text(pages_data: list[dict],
-               max_words:  int = 250,
-               min_words:  int = 30) -> list[dict]:
-    """
-    Semantic-aware chunking strategy.
-
-    Rules (in priority order):
-    1. Bullet/list blocks are detected and kept together as a single paragraph
-       group before any other processing.
-    2. Never break inside a paragraph — paragraph boundaries are always respected.
-    3. Short paragraphs (< min_words) are merged forward into the next paragraph
-       because they are likely headings, labels, or isolated lines.
-    4. Paragraphs exceeding max_words are split at sentence boundaries using a
-       robust tokeniser that handles abbreviations (Dr., sq.ft., etc.).
-    5. Overlap = last sentence of previous chunk, but only added if it does not
-       push the chunk over max_words.
-    """
-
-    # ── Fix 3: robust sentence splitter ─────────────────────────────────────
-    # Naive r'(?<=[.!?])\s+' breaks on abbreviations like "Dr.", "sq.ft.", "No."
-    # This pattern only splits after a period/!/? that is followed by an
-    # uppercase letter (start of a new sentence) or end-of-string, and ignores
-    # common abbreviations by requiring the preceding token to be longer than
-    # 2 characters or not a known title/unit abbreviation.
-    _ABBREV = re.compile(
-        r'\b(?:Mr|Mrs|Ms|Dr|Prof|Sr|Jr|vs|etc|approx|sq|ft|no|fig|'
-        r'Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\.',
-        re.IGNORECASE
-    )
-
-    def split_sentences(text: str) -> list[str]:
-        """
-        Split text into sentences without breaking on common abbreviations.
-        Strategy: temporarily replace known abbreviation periods with a
-        placeholder, split, then restore.
-        """
-        protected = _ABBREV.sub(lambda m: m.group().replace(".", "<!>"), text)
-        parts     = re.split(r'(?<=[.!?])\s+(?=[A-Z])', protected)
-        restored  = [p.replace("<!>", ".").strip() for p in parts if p.strip()]
-        return restored if restored else [text.strip()]
-
-    # ── Fix 2: bullet block detector ────────────────────────────────────────
-    _BULLET = re.compile(r'^\s*[-•*·▪▸]\s+', re.MULTILINE)
-
-    def group_bullets(paras: list[str]) -> list[str]:
-        """
-        Consecutive lines that look like bullet items are collapsed into a
-        single paragraph so their related content is always in one chunk.
-        """
-        result  = []
-        buf     = []
-        in_list = False
-
-        for para in paras:
-            lines       = para.splitlines()
-            bullet_lines = [l for l in lines if _BULLET.match(l)]
-            is_bullet    = len(bullet_lines) / max(len(lines), 1) >= 0.5
-
-            if is_bullet:
-                buf.append(para)
-                in_list = True
-            else:
-                if in_list and buf:
-                    result.append("\n".join(buf))
-                    buf     = []
-                    in_list = False
-                result.append(para)
-
-        if buf:
-            result.append("\n".join(buf))
-        return result
-
-    def split_long_paragraph(para: str, max_w: int) -> list[str]:
-        """Split an oversized paragraph at sentence boundaries."""
-        sentences = split_sentences(para)
-        chunks: list[str] = []
-        current: list[str] = []
-        count = 0
-
-        for sent in sentences:
-            wc = len(sent.split())
-            if count + wc > max_w and current:
-                chunks.append(" ".join(current))
-                current = [sent]
-                count   = wc
-            else:
-                current.append(sent)
-                count  += wc
-
-        if current:
-            chunks.append(" ".join(current))
-        return chunks if chunks else [para]
-
+               chunk_size: int = 200,
+               overlap:    int = 40) -> list[dict]:
     all_chunks = []
-
     for page in pages_data:
-        # ── Step 1: paragraph extraction ────────────────────────────────
-        raw_paras = re.split(r'\n\s*\n', page["text"])
-        paras     = [p.strip() for p in raw_paras if p.strip()]
-
-        # ── Step 2: group bullet blocks ──────────────────────────────────
-        paras = group_bullets(paras)
-
-        # ── Step 3: merge short paragraphs forward ───────────────────────
-        merged: list[str] = []
-        buffer = ""
-
-        for para in paras:
-            if not buffer:
-                buffer = para
-            elif len(buffer.split()) < min_words:
-                buffer = buffer + " " + para
+        paragraphs    = re.split(r'\n\s*\n', page["text"])
+        current_chunk: list[str] = []
+        for para in paragraphs:
+            words = para.split()
+            if len(current_chunk) + len(words) <= chunk_size:
+                current_chunk.extend(words)
             else:
-                merged.append(buffer)
-                buffer = para
-
-        if buffer:
-            merged.append(buffer)
-
-        # ── Step 4: build final chunks with safe overlap ─────────────────
-        last_sentence = ""
-
-        for para in merged:
-            word_count = len(para.split())
-
-            if word_count <= max_words:
-                # Fix 1: only add overlap if it doesn't exceed max_words
-                if last_sentence:
-                    combined = last_sentence + " " + para
-                    text     = combined if len(combined.split()) <= max_words \
-                               else para
-                else:
-                    text = para
-
-                all_chunks.append({
-                    "pdf_name":    page["pdf_name"],
-                    "page_number": page["page_number"],
-                    "text":        text
-                })
-                sents         = split_sentences(para)
-                last_sentence = sents[-1] if sents else ""
-
-            else:
-                # Paragraph too long — split at sentence boundaries
-                sub_chunks = split_long_paragraph(para, max_words)
-
-                for idx, sub in enumerate(sub_chunks):
-                    if idx == 0 and last_sentence:
-                        # Fix 1: enforce max_words on overlap here too
-                        combined = last_sentence + " " + sub
-                        text     = combined if len(combined.split()) <= max_words \
-                                   else sub
-                    else:
-                        text = sub
-
+                if current_chunk:
                     all_chunks.append({
                         "pdf_name":    page["pdf_name"],
                         "page_number": page["page_number"],
-                        "text":        text
+                        "text":        " ".join(current_chunk)
                     })
-
-                sents         = split_sentences(sub_chunks[-1])
-                last_sentence = sents[-1] if sents else ""
-
+                    current_chunk = current_chunk[-overlap:]
+                current_chunk.extend(words)
+        if current_chunk:
+            all_chunks.append({
+                "pdf_name":    page["pdf_name"],
+                "page_number": page["page_number"],
+                "text":        " ".join(current_chunk)
+            })
     return all_chunks
 
 
@@ -297,7 +159,7 @@ def search_with_latency(query:       str,
     candidate_idx = [i for i in candidate_idx if i != -1]
     timings["retrieval_s"] = time.perf_counter() - t0
 
-    # Stage 3 – Re-ranking or RRF fusion
+    # Stage 3 – Re-ranking
     t0 = time.perf_counter()
     if use_rerank and candidate_idx:
         pairs         = [(query, chunks[i]["text"]) for i in candidate_idx]
@@ -305,30 +167,10 @@ def search_with_latency(query:       str,
         ranked        = sorted(zip(candidate_idx, rerank_scores),
                                key=lambda x: x[1], reverse=True)
     else:
-        # Reciprocal Rank Fusion — combines dense and BM25 rank signals.
-        # RRF(d) = Σ 1 / (k + rank(d))  where k=60 is a standard smoothing constant.
-        # This is rank-based so dense and BM25 scores don't need to be on the
-        # same scale — both contribute equally regardless of their raw magnitudes.
-        RRF_K = 60
-
-        # Dense rank lookup  (rank 0 = best)
-        dense_rank = {int(dense_indices[0][j]): j
-                      for j in range(len(dense_indices[0]))}
-
-        # BM25 rank lookup  (rank 0 = best)
-        bm25_rank  = {int(idx): rank
-                      for rank, idx in enumerate(bm25_top_idx)}
-
-        rrf_scores = {}
-        for i in candidate_idx:
-            score = 0.0
-            if i in dense_rank:
-                score += 1.0 / (RRF_K + dense_rank[i])
-            if i in bm25_rank:
-                score += 1.0 / (RRF_K + bm25_rank[i])
-            rrf_scores[i] = score
-
-        ranked = sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)
+        score_map = {int(dense_indices[0][j]): float(dense_scores[0][j])
+                     for j in range(len(dense_indices[0]))}
+        ranked    = sorted([(i, score_map.get(i, 0.0)) for i in candidate_idx],
+                           key=lambda x: x[1], reverse=True)
     timings["reranking_s"] = time.perf_counter() - t0
     timings["total_s"]     = sum(timings.values())
 
